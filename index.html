@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voting Page</title>
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f3f4f6;
+        display: flex;
+        justify-content: center;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 420px;
+        padding: 20px;
+    }
+
+    /* Vote Image Box */
+    .vote-box {
+        background: #cfe3f5;
+        border-radius: 20px;
+        padding: 40px 20px;
+        text-align: center;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .vote-box img {
+        width: 150px;
+    }
+
+    /* Buttons */
+    .vote-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 16px;
+        text-decoration: none;
+        color: #fff;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        transition: 0.3s;
+    }
+
+    .vote-btn:hover {
+        transform: translateY(-2px);
+        opacity: 0.95;
+    }
+
+    .instagram { background: linear-gradient(90deg,#7b2ff7,#f107a3,#ff0000); }
+    .webde { background: linear-gradient(90deg,#ffd000,#ff9900); }
+    .tiktok { background: linear-gradient(90deg,#0f0f0f,#004aad); }
+    .gmx { background: linear-gradient(90deg,#004aad,#002e6d); }
+    .outlook { background: linear-gradient(90deg,#ff4b2b,#cc2b2b); }
+
+    /* Stats Card */
+    .stats {
+        background: #fff;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        margin-top: 20px;
+    }
+
+    .stat-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        font-size: 16px;
+    }
+
+    .stat-row i {
+        margin-right: 8px;
+        color: #3498db;
+    }
+
+    .progress-text {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .progress-bar {
+        background: #e5e7eb;
+        height: 8px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .progress {
+        width: 69%;
+        height: 100%;
+        background: #22c55e;
+        border-radius: 10px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Vote Image Box -->
+    <div class="vote-box">
+        <!-- Replace with your image -->
+        <img src="imagelic.jpg" alt="Vote Illustration">
+    </div>
+
+    <!-- Vote Buttons -->
+    <a href="#" class="vote-btn instagram">
+        <i class="fab fa-instagram"></i> Vote with Instagram
+    </a>
+
+    <a href="#" class="vote-btn webde">
+        <i class="fas fa-envelope"></i> Vote with Web.de
+    </a>
+
+    <a href="#" class="vote-btn tiktok">
+        <i class="fab fa-tiktok"></i> Vote with Tiktok
+    </a>
+
+    <a href="#" class="vote-btn gmx">
+        <i class="fas fa-envelope"></i> Vote with GMX
+    </a>
+
+    <a href="#" class="vote-btn outlook">
+        <i class="fas fa-envelope"></i> Vote with Outlook
+    </a>
+
+    <!-- Stats Section -->
+    <div class="stats">
+        <div class="stat-row">
+            <span><i class="fas fa-users"></i> Total Votes</span>
+            <strong>312</strong>
+        </div>
+
+        <div class="stat-row">
+            <span><i class="fas fa-trophy"></i> Votes Needed</span>
+            <strong>450</strong>
+        </div>
+
+        <div class="progress-text">
+            <span>Current Progress</span>
+            <span>69%</span>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
